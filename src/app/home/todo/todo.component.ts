@@ -1,8 +1,9 @@
 import { Component, OnInit, } from '@angular/core';
 import { IonList, IonItemSliding, IonItemOptions, IonItemOption, IonLabel, IonItem } from '@ionic/angular/standalone'
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc } from '@angular/fire/firestore';
 import { Observable, } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { deleteDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-todo',
@@ -25,5 +26,10 @@ export class TodoComponent implements OnInit {
   getToDo(){
     const collectionInstance = collection(this.firestore, 'todo')
     this.data = collectionData(collectionInstance, {idField: 'id'})
+  }
+
+  deleteToDo(id:string){
+    const docInstance = doc(this.firestore, 'todo', id)
+    deleteDoc(docInstance)
   }
 }

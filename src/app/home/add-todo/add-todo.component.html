@@ -1,2 +1,3 @@
-<ion-input label="Add Todo here" label-placement="floating" fill="outline" placeholder="Enter text"></ion-input>
-<ion-button expand="block">Submit</ion-button>
+<ion-input label="Add Todo here" [(ngModel)]="todoText" label-placement="floating" fill="outline" placeholder="Enter text"
+  class=""></ion-input>
+<ion-button expand="block" (click)="onSubmit()">Submit</ion-button>
