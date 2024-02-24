@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { IonModal, IonList, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonLabel, IonInput, IonButton, IonToolbar, IonHeader, IonTitle, IonContent, IonButtons } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { addDoc, collection, Firestore } from '@angular/fire/firestore';
@@ -10,6 +10,7 @@ import { addDoc, collection, Firestore } from '@angular/fire/firestore';
   imports: [FormsModule, IonModal, IonButtons, IonContent, IonTitle, IonHeader, IonToolbar, IonButton, IonInput, IonLabel, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonList]
 })
 export class AddTodoComponent implements OnInit {
+  @Output() todoSubmitted: EventEmitter<any> = new EventEmitter<any>();
 
   todoText: any;
 
@@ -18,11 +19,11 @@ export class AddTodoComponent implements OnInit {
   ngOnInit() { }
 
   onSubmit() {
-    const collectionInctance = collection(this.firestore, 'todo')
-    const dataToSave = { name: this.todoText, status:'todo'}
-    addDoc(collectionInctance, dataToSave).then(() => {
-      console.log(this.todoText)
+    const collectionInstance = collection(this.firestore, 'todo')
+    const dataToSave = { name: this.todoText, state: 'todo' }
+    addDoc(collectionInstance, dataToSave).then(() => {
       this.todoText = ''
+      this.todoSubmitted.emit()
     })
   }
 
