@@ -3,6 +3,7 @@ import { SettingsComponent } from './home/settings/settings.component';
 import { TodoComponent } from './home/todo/todo.component';
 import { WorkingComponent } from './home/working/working.component';
 import { CompleteComponent } from './home/complete/complete.component';
+import { authGuard } from './services/user/auth.guard';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+    canActivate:[authGuard],
     children: [
       {
         path: 'settings',
@@ -31,5 +33,9 @@ export const routes: Routes = [
         component: CompleteComponent
       }
     ]
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
   }
 ];

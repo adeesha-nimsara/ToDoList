@@ -1,8 +1,8 @@
-<div class="p-2 mt-14">
-  <ion-list>
-    <ion-item-sliding *ngFor="let data of data | async">
+<ion-content [fullscreen]="true" [scrollEvents]="true">
+  <ion-list class="mt-14 mx-2 bg-transparent">
+    <ion-item-sliding *ngFor="let data of data | async" class="mb-2 rounded-lg">
       <ion-item-options side="start" (ionSwipe)="deleteToDo(data.id)" (click)="deleteToDo(data.id)">
-        <ion-item-option color="success" expandable>Delete</ion-item-option>
+        <ion-item-option color="danger" expandable>Delete ToDo</ion-item-option>
       </ion-item-options>
 
       <ion-item>
@@ -11,8 +11,8 @@
 
       <ion-item-options side="end" (ionSwipe)="changeToDoState('working', data.id, data.name)"
         (click)="changeToDoState('working', data.id, data.name)">
-        <ion-item-option color="danger" expandable>Working</ion-item-option>
+        <ion-item-option color="primary" expandable>Working ToDo</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-</div>
+</ion-content>

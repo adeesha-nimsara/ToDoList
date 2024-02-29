@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" id="header">
   <ion-toolbar>
     <ion-title>
       {{tabName}}
@@ -6,36 +6,42 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-router-outlet></ion-router-outlet>
 
-  <div id="container">
-    <ion-router-outlet></ion-router-outlet>
-  </div>
+<ion-modal trigger="open-modal">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Add ToDo</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="hideModal()" [strong]="true">Confirm</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <app-add-todo (todoSubmitted)="hideModal()"></app-add-todo>
+    </ion-content>
+  </ng-template>
+</ion-modal>
 
-  <ion-modal trigger="open-modal">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Add ToDo</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="hideModal()" [strong]="true">Confirm</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <app-add-todo (todoSubmitted)="hideModal()"></app-add-todo>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+<ion-toast
+color="{{toastColor}}" 
+[isOpen]="toastOpened" 
+message="{{toastMessage}}" 
+[duration]="1000" 
+(didDismiss)="toastDismiss()"
+animated="true"
+cssClass="p-5"
+position="top"
+></ion-toast>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="pb-14">
-    <ion-fab-button id="open-modal" expand="block">
-      <ion-icon name="add-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-</ion-content>
+<ion-fab slot="fixed" vertical="bottom" horizontal="end"  class="mb-14">
+  <ion-fab-button id="open-modal" expand="block">
+    <ion-icon name="add-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
-<ion-tabs>
+<ion-tabs id="tabs">
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="todo" (click)="getTabName('ToDo')">
       <ion-icon name="reader-outline"></ion-icon>
