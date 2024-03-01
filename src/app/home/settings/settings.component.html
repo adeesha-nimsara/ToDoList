@@ -1,10 +1,20 @@
 <ion-content [fullscreen]="true" [scrollEvents]="true">
   <ion-list class="mt-14 mx-2 bg-transparent">
     <ion-item>
-      <ion-input label="First Name"></ion-input>
+      <span>
+        <ion-text>
+          <ion-icon name="person-outline"></ion-icon>
+          Name : {{userName}}
+        </ion-text>
+      </span>
     </ion-item>
     <ion-item>
-      <ion-input label="Last Name"></ion-input>
+      <span>
+        <ion-text>
+          <ion-icon name="mail-outline"></ion-icon>
+          Email : {{userEmail}}
+        </ion-text>
+      </span>
     </ion-item>
     <ion-item>
       <ion-toggle>

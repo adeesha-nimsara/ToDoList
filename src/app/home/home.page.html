@@ -8,13 +8,13 @@
 
 <ion-router-outlet></ion-router-outlet>
 
-<ion-modal trigger="open-modal">
+<ion-modal [isOpen]="isModalOpen">
   <ng-template>
     <ion-header>
       <ion-toolbar>
         <ion-title>Add ToDo</ion-title>
         <ion-buttons slot="end">
-          <ion-button (click)="hideModal()" [strong]="true">Confirm</ion-button>
+          <ion-button (click)="setOpen(false)" [strong]="true">Confirm</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -35,8 +35,8 @@ cssClass="p-5"
 position="top"
 ></ion-toast>
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="end"  class="mb-14">
-  <ion-fab-button id="open-modal" expand="block">
+<ion-fab slot="fixed" vertical="bottom" horizontal="end"  class="mb-14" *ngIf="isFabopen">
+  <ion-fab-button expand="block" (click)="setOpen(true)">
     <ion-icon name="add-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
